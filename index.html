@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seblak Enak - Home</title>
+    <style>
+        /* Reset dasar */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF8DC, #FAF0E6);
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            color: #FFDAB9;
+        }
+
+        main {
+            text-align: center;
+            padding: 50px;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #800000;
+        }
+
+        main p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #800000;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #800000;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: #800000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Gaya untuk gambar */
+        .hero-image {
+    width: 20%; /* Mengatur lebar gambar menjadi 80% dari lebar halaman */
+    height: auto; /* Mengatur tinggi otomatis agar proporsional dengan lebar */
+    object-fit: cover; /* Agar gambar tetap terpotong proporsional */
+    margin-bottom: 30px;
+         }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>SEBLAK NYABLAKKK</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu Paket</a></li>
+                <li><a href="topping.html">Topping</a></li>
+                <li><a href="kepedasan.html">Level Kepedasan</a></li>
+                <li><a href="minuman.html">Minuman</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="confirm-order.html">Confirm</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Menambahkan gambar di halaman utama -->
+        <img src="orang.png" alt="orang" class="hero-image">
+
+        <h2>Selamat Datang di Seblak Enak</h2>
+        <p>Nikmati berbagai macam seblak dengan rasa istimewa. Pesan sekarang dan rasakan pedasnya!</p>
+        <a href="menu.html" class="btn">Lihat Menu</a>
+    </main>
+    <!-- Tabel Nama Karyawan -->
+    <h2>Daftar Karyawan</h2>
+    <table border="1" style="width: 80%; margin: 20px auto; border-collapse: collapse; text-align: left;">
+        <thead>
+            <tr style="background-color: #800000; color: white;">
+                <th style="padding: 10px;">No</th>
+                <th style="padding: 10px;">Nama</th>
+                <th style="padding: 10px;">Jabatan</th>
+                <th style="padding: 10px;">Kontak</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="padding: 10px;">1</td>
+                <td style="padding: 10px;">Dwi Rahmawati</td>
+                <td style="padding: 10px;">Manager</td>
+                <td style="padding: 10px;">087654256</td>
+            </tr>
+            <tr>
+                <td style="padding: 10px;">2</td>
+                <td style="padding: 10px;">Saskia Dwi Vadyla</td>
+                <td style="padding: 10px;">Koki</td>
+                <td style="padding: 10px;">081234567</td>
+            </tr>
+        </tbody>
+    </table>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Seblak</title>
+    <style>
+        /* Reset dasar */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFF8DC, #FAF0E6);
+            color: #333;
+        }
+
+        header {
+            background:  #800000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            color: #FFDAB9;
+        }
+
+        main {
+            text-align: center;
+            padding: 50px;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color:  #800000;
+        }
+
+        .product {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            margin: 15px 0 10px;
+            color:  #800000;
+        }
+
+        .product-card p {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background:  #800000;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background:  #800000;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background:  #800000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>SEBLAK NYABLAKKK</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu Paket</a></li>
+                <li><a href="topping.html">Topping</a></li>
+                <li><a href="kepedasan.html">Level Kepedasan</a></li>
+                <li><a href="minuman.html">Minuman</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="confirm-order.html">Confir</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Menu Seblak Paket Kami</h2>
+        <div class="product">
+            <div class="product-card">
+                <img src="seblak komplit.jpeg" alt="Seblak Original">
+                <h3>Seblak Komplit</h3>
+                <p>Harga: Rp30.000</p>
+                <a href="#" class="btn" onclick="addTopping('Seblak Komplit', 30000)">Pilih Seblak Komplit</a>
+            </div>
+            <div class="product-card">
+                <img src="pakethemat.jpg" alt="Seblak Pedas">
+                <h3>Seblak Paket Hemat</h3>
+                <p>Harga: Rp15.000</p>
+                <a href="#" class="btn" onclick="addTopping('Seblak Paket Hemat', 15000)">Pilih Bakso Seblak Paket Hemat</a>
+            </div>
+            <div class="product-card">
+                <img src="paket murah.jpg" alt="Seblak Komplit">
+                <h3>Seblak Paket Murah</h3>
+                <p>Harga: Rp23.000</p>
+                <a href="#" class="btn" onclick="addTopping('Seblak Paket Murah', 23000)">Pilih Seblak Paket Murah</a>
+            </div>
+        </div>
+    </main>
+    <script>
+        function addTopping(name, price) {
+            let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+            orderItems.push({ name: name, price: 'Rp' + price.toLocaleString('id-ID') });
+            localStorage.setItem('orderItems', JSON.stringify(orderItems));
+            // Redirect ke halaman pemesanan
+            window.location.href = "order.html";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Seblak - Tabel</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FFFAF0, #FFF5EE);
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFDAB9;
+        }
+
+        main {
+            padding: 30px 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #800000;
+            color: white;
+            font-weight: bold;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .remove-btn {
+            background: #FF6347;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            border: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .remove-btn:hover {
+            background: #FF4500;
+            transform: scale(1.1);
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #800000;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            margin: 15px 10px;
+            text-align: center;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: #6b0000;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: #800000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            margin-top: 30px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            table th,
+            table td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Seblak Enak - Daftar Pemesanan</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu Paket</a></li>
+                <li><a href="topping.html">Topping</a></li>
+                <li><a href="kepedasan.html">Level Kepedasan</a></li>
+                <li><a href="minuman.html">Minuman</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="confirm-order.html">Confirm</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="order-list">
+            <h3>Daftar Pemesanan Seblak</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Menu</th>
+                        <th>Harga</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="orderItems">
+                    <!-- Daftar item yang dipilih akan muncul di sini -->
+                </tbody>
+            </table>
+            <div class="total">
+                <p>Total: Rp <span id="totalPrice">0</span></p>
+            </div>
+            <div style="text-align: center;">
+                <a href="topping.html" class="btn">Kembali ke Topping</a>
+                <a href="menu.html" class="btn">Kembali ke Menu</a>
+                <a href="kepedasan.html" class="btn">Kembali ke Level Kepedasan</a>
+                <a href="minuman.html" class="btn">Kembali ke Minuman</a>
+                <a href="confirm-order.html" class="btn">Konfirmasi Pemesanan</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Fungsi untuk mengambil data pemesanan dari localStorage
+        function loadOrder() {
+            let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+            let orderList = document.getElementById('orderItems');
+            let totalPrice = 0;
+
+            // Menghapus daftar sebelumnya
+            orderList.innerHTML = '';
+
+            // Menampilkan daftar item
+            orderItems.forEach((item, index) => {
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td><button class="remove-btn" onclick="removeItem(${index})">Hapus</button></td>
+                `;
+                orderList.appendChild(row);
+
+                // Menghitung total harga
+                totalPrice += parseInt(item.price.replace('Rp', '').replace('.', '').trim());
+            });
+
+            // Menampilkan total harga
+            document.getElementById('totalPrice').textContent = totalPrice.toLocaleString('id-ID');
+        }
+
+        // Fungsi untuk menghapus item dari daftar pemesanan
+        function removeItem(index) {
+            let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+            orderItems.splice(index, 1); // Menghapus item berdasarkan index
+            localStorage.setItem('orderItems', JSON.stringify(orderItems)); // Menyimpan ulang daftar yang sudah diperbarui
+            loadOrder(); // Memuat ulang daftar pesanan
+        }
+
+        // Memuat daftar pemesanan saat halaman dibuka
+        window.onload = loadOrder;
+    </script>
+
+</body>
+
+</html>

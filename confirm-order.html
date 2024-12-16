@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Pemesanan</title>
+    <style>
+        /* Reset dasar */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FFFAF0, #FFF5EE);
+            color: #333;
+        }
+
+        header {
+            background: #800000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        nav ul li a:hover {
+            color: #FFDAB9;
+        }
+
+        main {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        main h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #800000;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        table th,
+        table td {
+            padding: 12px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #800000;
+            color: white;
+            font-weight: bold;
+        }
+
+        table td {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #800000;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #800000;
+            transform: scale(1.1);
+        }
+
+        footer {
+            background: #800000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Konfirmasi Pemesanan Seblak</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="menu.html">Menu Paket</a></li>
+                <li><a href="topping.html">Topping</a></li>
+                <li><a href="kepedasan.html">Level Kepedasan</a></li>
+                <li><a href="minuman.html">Minuman</a></li>
+                <li><a href="order.html">Order</a></li>
+                <li><a href="confirm-order.html">Confirm</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="order-summary">
+            <h2>Ringkasan Pemesanan:</h2>
+
+            <!-- Tabel Pemesanan -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Menu</th>
+                        <th>Harga</th>
+                    </tr>
+                </thead>
+                <tbody id="order-list">
+                    <!-- Pesanan akan ditampilkan di sini -->
+                </tbody>
+            </table>
+
+            <p><strong>Total:</strong> <span id="total-price">Rp0</span></p>
+
+            <a href="index.html" class="btn">Kembali ke Menu</a>
+            <a href="#" class="btn" onclick="confirmOrder()">Konfirmasi Pemesanan</a>
+        </div>
+    </main>
+
+    <script>
+        window.onload = function () {
+            const orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+            const orderList = document.getElementById('order-list');
+            const totalPriceElement = document.getElementById('total-price');
+            let totalPrice = 0;
+
+            if (orderItems.length === 0) {
+                orderList.innerHTML = "<tr><td colspan='3'>Tidak ada topping yang dipilih.</td></tr>";
+                totalPriceElement.textContent = "Rp0";
+            } else {
+                orderItems.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${item.name}</td>
+                        <td>${item.price}</td>
+                    `;
+                    orderList.appendChild(row);
+                    // Menghitung total harga
+                    const price = parseInt(item.price.replace('Rp', '').replace('.', ''), 10);
+                    totalPrice += price;
+                });
+                totalPriceElement.textContent = `Rp${totalPrice.toLocaleString('id-ID')}`;
+            }
+        }
+
+        function confirmOrder() {
+            const orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+            if (orderItems.length === 0) {
+                alert("Tidak ada pesanan yang bisa dikonfirmasi.");
+                return;
+            }
+
+            // Lakukan proses konfirmasi pemesanan di sini, misalnya simpan ke database atau kirim email.
+            alert("Pemesanan Anda telah dikonfirmasi. Terima kasih!");
+
+            // Menghapus data pemesanan setelah konfirmasi
+            localStorage.removeItem('orderItems');
+            window.location.href = "index.html"; // Arahkan kembali ke halaman utama
+        }
+    </script>
+</body>
+
+</html>
